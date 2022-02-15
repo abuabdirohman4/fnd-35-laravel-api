@@ -14,14 +14,38 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
+// Route::middleware('auth:api')->get('/user', function (Request $request) {
+//     return $request->user();
+// });
+
+Route::get('/products', function(){
+    return response()->json(
+        [
+            "message" => "GET Method Success"
+        ]
+    );
 });
 
-// Route::get('/products', function(){
-//     return response()->json(
-//         [
-//             "message" => "GET Method Success"
-//         ]
-//     );
-// });
+Route::post('/product', function(){
+    return response()->json(
+        [
+            "message" => "POST Method Success"
+        ]
+    );
+});
+
+Route::put('/product/{id}', function($id){
+    return response()->json(
+        [
+            "message" => "PUT Method Success " . $id
+        ]
+    );
+});
+
+Route::delete('/product/{id}', function($id){
+    return response()->json(
+        [
+            "message" => "DELETE Method Success " . $id
+        ]
+    );
+});
