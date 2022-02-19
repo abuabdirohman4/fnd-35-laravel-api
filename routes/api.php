@@ -28,6 +28,8 @@ use App\Http\Controllers\ProductController;
 // Laravel 8
 Route::get('/products', [ProductController::class, 'get']);
 
+Route::get('/product/{id}', [ProductController::class, 'getById']);
+
 Route::post('/product', [ProductController::class, 'post']);
 
 Route::put('/product/{id}', [ProductController::class, 'put']);

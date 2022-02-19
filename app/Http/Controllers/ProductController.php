@@ -8,9 +8,20 @@ use App\Models\Product;
 class ProductController extends Controller
 {
     function get(){
+        $data = Product::all();
         return response()->json(
             [
-                "message" => "GET Method Success"
+                "message" => "GET Method Success",
+                "data" => $data
+            ]
+        );
+    }
+    function getById($id){
+        $data = Product::where('id', $id)->get();
+        return response()->json(
+            [
+                "message" => "GET Method Spesific id Success",
+                "data" => $data
             ]
         );
     }
