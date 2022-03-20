@@ -9,7 +9,7 @@
 
 ## About Repo
 
-This is my repo for learning simple create RESTful API with Laravel 9 
+This is my repo for learning simple create RESTful API with Laravel 8 
 
 ## Status
 
