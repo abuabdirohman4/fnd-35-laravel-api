@@ -17,14 +17,23 @@ class ProductController extends Controller
         );
     }
     function getById($id){
-        $data = Product::where('id', $id)->get();
+        // $data = Product::where('id', $id)->get();
+        $data = Product::where('id', $id)->get()->first();
+        if ($data) {
+            return response()->json(
+                [
+                    "message" => "GET Method Spesific id Success",
+                    "data" => $data
+                ]
+            );
+        }
         return response()->json(
             [
-                "message" => "GET Method Spesific id Success",
-                "data" => $data
-            ]
+                "message" => "Product with id " . $id . " not found"
+            ], 400
         );
     }
+
     function post(Request $request){
         $product = new Product;
         $product->name = $request->name;
@@ -66,10 +75,19 @@ class ProductController extends Controller
         );
     }
     function delete($id){
+        $product = Product::firstWhere('id', $id);
+        if ($product) {
+            $product->delete();
+            return response()->json(
+                [
+                    "message" => "DELETE Product id " . $id . " Success"
+                ]
+            );
+        }
         return response()->json(
             [
-                "message" => "DELETE Method Success " . $id
-            ]
+                "message" => "Product with id " . $id . " not found"
+            ], 400
         );
     }
 }
