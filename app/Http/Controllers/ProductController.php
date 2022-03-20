@@ -31,7 +31,6 @@ class ProductController extends Controller
         $product->price = $request->price;
         $product->quantity = $request->quantity;
         $product->active = $request->active;
-        $product->name = $request->name;
 
         $product->save();
 
@@ -42,11 +41,28 @@ class ProductController extends Controller
             ]
         );
     }
-    function put($id){
+    function put($id, Request $request){
+        // $product = Product::where('id', $id)->first();
+        $product = Product::firstWhere('id', $id);
+        if ($product) {
+            $product->name = $request->name ? $request->name : $product->name;
+            $product->price = $request->price ? $request->price : $product->price;
+            $product->quantity = $request->quantity ? $request->quantity : $product->quantity;
+            $product->active = $request->active ? $request->active : $product->active;
+
+            $product->save();
+
+            return response()->json(
+                [
+                    "message" => "PUT Method Success " ,
+                    "data" =>  $request->name
+                ]
+            );
+        }
         return response()->json(
             [
-                "message" => "PUT Method Success " . $id
-            ]
+                "message" => "Product with id " . $id . " not found"
+            ], 400
         );
     }
     function delete($id){
